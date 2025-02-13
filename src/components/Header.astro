@@ -35,10 +35,10 @@ const { logo = "/images/logo.svg", links = [] } = Astro.props;
       <div class="hidden md:flex space-x-8">
         {links?.filter(Boolean).map((link) => (
           <a
-            href={link.url || '#'}
+            href={link?.url || '#'}
             class="text-gray-600 hover:text-gray-900 transition-colors"
           >
-            {link.label || 'Untitled Link'}
+            {link?.label || 'Untitled Link'}
           </a>
         ))}
       </div>
