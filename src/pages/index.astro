@@ -1,11 +1,42 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import Contact from '../components/Contact.astro';
+import ClientCarousel from '../components/ClientCarousel.astro';
+import Websites from '../components/Websites.astro';
+import { client } from "../../tina/__generated__/client";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const heroResponse = await client.queries.hero({ relativePath: "hero.json" });
+const heroData = heroResponse.data.hero;
+
+const servicesResponse = await client.queries.services({ relativePath: "services.json" });
+const servicesData = servicesResponse.data.services;
+
+const contactResponse = await client.queries.contact({ relativePath: "contact.json" });
+const contactData = contactResponse.data.contact;
+
+
+const navigationResponse = await client.queries.navigation({ relativePath: "nav.json" });
+const navigationData = navigationResponse.data.navigation;
+
+const websitesResponse = await client.queries.websites({ relativePath: "websites.json" });
+const websitesData = websitesResponse.data.websites;
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Website UMKM Murah 200 ribu - Ahli Web Murah">
+  <Header {...navigationData} />
+  <main>
+    <Hero {...heroData} />
+    <Services {...servicesData} />
+    <Contact {...contactData} />
+    <Websites {...websitesData} />
+    
+  </main>
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p>&copy; {new Date().getFullYear()} Your Agency. All rights reserved.</p>
+    </div>
+  </footer>
 </Layout>

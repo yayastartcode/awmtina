@@ -1,0 +1,52 @@
+---
+interface Website {
+  __typename?: "WebsitesWebsites";
+  url: string;
+}
+
+interface Props {
+  __typename?: "Websites";
+  id?: string;
+  websites?: (Website | null)[] | null;
+  _sys?: {
+    __typename?: "SystemInfo";
+    filename: string;
+    basename: string;
+    hasReferences?: boolean | null;
+    breadcrumbs: string[];
+    path: string;
+    relativePath: string;
+    extension: string;
+  };
+}
+
+const { websites = [] } = Astro.props;
+---
+
+<section id="websites" class="py-16 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        Our Portfolio
+      </h2>
+      <p class="text-lg text-gray-600">
+        Explore our recent website development projects
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {websites?.filter(Boolean).map((website) => (
+        <a
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-white rounded-lg shadow-md p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center justify-center"
+        >
+          <span class="text-lg text-gray-800 hover:text-blue-600 transition-colors">
+            {website?.url || 'No Links'}
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

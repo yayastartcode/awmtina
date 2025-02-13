@@ -1,0 +1,16 @@
+{
+  "clients": [
+    {
+      "name": "Pertamina",
+      "logo": "/public/images/logoper.jpg"
+    },
+    {
+      "name": "Client 2",
+      "logo": "/images/client2.png"
+    },
+    {
+      "name": "Client 3",
+      "logo": "/images/client3.png"
+    }
+  ]
+}

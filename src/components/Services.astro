@@ -1,0 +1,67 @@
+---
+interface Service {
+  __typename?: "ServicesServices";
+  title?: string;
+  description?: string;
+  ServiceImage?: string;
+}
+
+interface Props {
+  __typename?: "Services";
+  id?: string;
+  services?: (Service | null)[] | null;
+  _sys?: {
+    __typename?: "SystemInfo";
+    filename: string;
+    basename: string;
+    hasReferences?: boolean | null;
+    breadcrumbs: string[];
+    path: string;
+    relativePath: string;
+    extension: string;
+  };
+}
+
+const { services = [] } = Astro.props;
+---
+
+<section id="services" class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        Our Services
+      </h2>
+      <p class="text-lg text-gray-600">
+        Comprehensive solutions for your business growth
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {services?.filter(Boolean).map((service) => (
+        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+          <div class="relative h-48 w-full">
+            {service?.ServiceImage ? (
+              <img
+                src={service?.ServiceImage || ''}
+                alt={service?.title || ''}
+                class="w-full h-full object-cover"
+              />
+            ) : (
+              <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                <span class="text-gray-400 text-lg">No image available</span>
+              </div>
+            )}
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">
+              {service?.title || 'Untitled Service'}
+            </h3>
+            <p class="text-gray-600">
+              {service?.description || 'No description available'}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

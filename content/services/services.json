@@ -1,0 +1,19 @@
+{
+  "services": [
+    {
+      "title": "Digital Marketing Online Advertising",
+      "description": "Strategic digital marketing solusi untuk iklan di sosial media dan mesin pencari google agar menambah kehadiran anda di dunia online dan meraih target audience anda secara efektif efisien.",
+      "ServiceImage": "/public/images/freepik__infographic-about-digital-marketing-strategies-dis__23888.jpeg"
+    },
+    {
+      "title": "Website Development",
+      "description": "Custom website development service yang disesuaikan dengan apa yang dibutuhkan oleh bisnis anda dan menjadi brand identity.",
+      "ServiceImage": "/public/images/freepik__the-style-is-modern-and-it-is-a-detailed-illustrat__23889.jpeg"
+    },
+    {
+      "title": "Social Media Management",
+      "description": "Comprehensive social media management to engage your audience and build brand loyalty.",
+      "ServiceImage": "/public/images/freepik__a-vibrant-digital-marketing-online-sketch-featurin__23890.jpeg"
+    }
+  ]
+}

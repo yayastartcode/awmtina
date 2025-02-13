@@ -1,48 +1,91 @@
-# Astro Starter Kit: Basics
+# Agency Website with Astro and Tina CMS
 
-```sh
-npm create astro@latest -- --template basics
+A modern agency website built with Astro.js and Tina CMS for content management.
+
+## Features
+
+- Modern and responsive design
+- Fast static site generation with Astro
+- Content management with Tina CMS
+- Services showcase
+- Client logo carousel
+- WhatsApp integration for contact
+- Mobile-friendly navigation
+
+## Tech Stack
+
+- [Astro](https://astro.build/) - Static Site Generator
+- [Tina CMS](https://tina.io/) - Headless CMS
+- [TailwindCSS](https://tailwindcss.com/) - Styling
+- TypeScript - Type safety
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies:
+```bash
+npm install
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+3. Start the Tina CMS development server:
+```bash
+npx tinacms dev
+```
+This will start both the Astro development server and Tina CMS locally.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+4. Run the development server:
+```bash
+npm run dev
+```
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+5. Open [http://localhost:4321](http://localhost:4321) in your browser
 
-## 🚀 Project Structure
+## Content Management
 
-Inside of your Astro project, you'll see the following folders and files:
+All content is managed through Tina CMS. You can edit:
+- Navigation menu and logo
+- Hero section content and image
+- Services list
+- Client logos
+- Contact information
 
-```text
-/
-├── public/
-│   └── favicon.svg
+To access the CMS:
+1. Run the development server with `npx tinacms dev`
+2. Visit [http://localhost:4321/admin](http://localhost:4321/admin)
+3. Edit content directly - changes will be saved to your local content files in the `content/` directory
+4. Commit changes to Git to persist them
+
+## Project Structure
+
+```
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/     # UI components
+│   ├── layouts/        # Page layouts
+│   ├── pages/          # Routes and pages
+│   └── styles/         # Global styles
+├── public/            # Static assets
+├── content/           # CMS content
+└── tina/             # Tina CMS configuration
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Customization
 
-## 🧞 Commands
+The website can be customized by:
+1. Modifying the Tailwind configuration
+2. Editing component styles
+3. Updating the Tina CMS schema
+4. Adding new sections or features
 
-All commands are run from the root of the project, from a terminal:
+## Deployment
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+The site can be deployed to any static hosting platform:
+1. Build the site:
+```bash
+npm run build
+```
 
-## 👀 Want to learn more?
+2. Deploy the `dist` directory
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## License
+
+This project is licensed under the MIT License.

@@ -1,0 +1,51 @@
+fragment NavigationParts on Navigation {
+  __typename
+  logo
+  links {
+    __typename
+    label
+    url
+  }
+}
+
+fragment HeroParts on Hero {
+  __typename
+  title
+  description
+  promotionImage
+  buttonText
+  buttonLink
+}
+
+fragment ServicesParts on Services {
+  __typename
+  services {
+    __typename
+    title
+    description
+    ServiceImage
+  }
+}
+
+fragment ContactParts on Contact {
+  __typename
+  whatsappLink
+  whatsappText
+}
+
+fragment ClientsParts on Clients {
+  __typename
+  clients {
+    __typename
+    name
+    logo
+  }
+}
+
+fragment WebsitesParts on Websites {
+  __typename
+  websites {
+    __typename
+    url
+  }
+}

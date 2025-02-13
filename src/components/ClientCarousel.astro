@@ -1,0 +1,44 @@
+---
+interface Client {
+  name: string;
+  logo: string;
+}
+
+interface Props {
+  clients: Client[];
+}
+
+const { clients } = Astro.props;
+---
+
+<div class="py-12 bg-white">
+  <div class="container mx-auto px-4">
+    <h3 class="text-2xl font-semibold text-center text-gray-900 mb-8">
+      Trusted by Leading Companies
+    </h3>
+    <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+      {
+        clients.map((client) => (
+          <div class="w-48 h-32 flex items-center justify-center bg-gray-100 rounded-lg">
+            <img
+              src={client.logo}
+              alt={`${client.name} logo`}
+              class="max-w-full max-h-full object-contain"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+</style>

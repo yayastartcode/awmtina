@@ -1,0 +1,57 @@
+---
+interface Props {
+  __typename?: "Hero";
+  id?: string;
+  title: string;
+  description: string;
+  promotionImage: string;
+  buttonText?: string;
+  buttonLink?: string;
+  _sys?: {
+    __typename?: "SystemInfo";
+    filename: string;
+    basename: string;
+    hasReferences?: boolean | null;
+    breadcrumbs: string[];
+    path: string;
+    relativePath: string;
+    extension: string;
+  };
+}
+
+const { 
+  title = "Welcome to Our Website",
+  description = "We create amazing digital experiences",
+  promotionImage = "/images/hero.jpg",
+  buttonText = "Contact Us", 
+  buttonLink = "#contact" 
+} = Astro.props;
+---
+
+<section class="relative pt-32 pb-16 md:pt-40 md:pb-24">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="md:w-1/2">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          {title}
+        </h1>
+        <p class="text-lg text-gray-600 mb-8">
+          {description}
+        </p>
+        <a
+          href={buttonLink}
+          class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          {buttonText}
+        </a>
+      </div>
+      <div class="md:w-1/2">
+        <img
+          src={promotionImage}
+          alt="Promotion"
+          class="w-full h-auto rounded-lg shadow-lg"
+        />
+      </div>
+    </div>
+  </div>
+</section>

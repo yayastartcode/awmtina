@@ -1,0 +1,78 @@
+---
+interface Link {
+  __typename?: "NavigationLinks";
+  label?: string;
+  url?: string;
+}
+
+interface Props {
+  __typename?: "Navigation";
+  id?: string;
+  logo?: string;
+  _sys?: {
+    __typename?: "SystemInfo";
+    filename: string;
+    basename: string;
+    hasReferences?: boolean | null;
+    breadcrumbs: string[];
+    path: string;
+    relativePath: string;
+    extension: string;
+  };
+  links?: (Link | null)[] | null;
+}
+
+const { logo = "/images/logo.svg", links = [] } = Astro.props;
+---
+
+<header class="fixed w-full top-0 z-50 bg-white shadow-md py-4">
+  <div class="container mx-auto px-4">
+    <nav class="flex items-center justify-between h-16">
+      <a href="/" class="flex items-center">
+        <img src={logo} alt="Company Logo" class="h-[80px] w-[200px] object-contain" />
+      </a>
+
+      <div class="hidden md:flex space-x-8">
+        {links?.filter(Boolean).map((link) => (
+          <a
+            href={link.url || '#'}
+            class="text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            {link.label || 'Untitled Link'}
+          </a>
+        ))}
+      </div>
+
+      <button
+        class="md:hidden p-2"
+        aria-label="Menu"
+        id="menu-button"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const menuButton = document.getElementById('menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (menuButton && mobileMenu) {
+    menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+</script>

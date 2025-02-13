@@ -3,12 +3,20 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "TINA_PUBLIC_DATA_LAYER_PORT=9002 tinacms dev -c 'astro dev' --datalayer-port 9002",
+    "start": "astro dev",
+    "build": "tinacms build && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.2.5"
+    "@digi4care/astro-google-tagmanager": "^1.4.0",
+    "@tinacms/cli": "^1.5.39",
+    "astro": "^4.2.1",
+    "tinacms": "^1.5.28"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "tailwindcss": "^4.0.3"
   }
 }

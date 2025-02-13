@@ -1,0 +1,21 @@
+{
+  "logo": "/public/images/awmlg.png",
+  "links": [
+    {
+      "label": "Home",
+      "url": "/"
+    },
+    {
+      "label": "Services",
+      "url": "#services"
+    },
+    {
+      "label": "Contact",
+      "url": "#contact"
+    },
+    {
+      "label": "Portofolio",
+      "url": "#websites"
+    }
+  ]
+}
