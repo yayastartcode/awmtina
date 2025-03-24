@@ -1,3 +1,10 @@
+fragment TiktokadsParts on Tiktokads {
+  __typename
+  title
+  content
+  featureImage
+}
+
 fragment NavigationParts on Navigation {
   __typename
   logo

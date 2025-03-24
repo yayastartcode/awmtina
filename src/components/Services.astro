@@ -1,15 +1,15 @@
 ---
 interface Service {
   __typename?: "ServicesServices";
-  title?: string;
-  description?: string;
-  ServiceImage?: string;
+  title?: string | null | undefined;
+  description?: string | null | undefined;
+  ServiceImage?: string | null | undefined;
 }
 
 interface Props {
   __typename?: "Services";
   id?: string;
-  services?: (Service | null)[] | null;
+  services?: (Service | null)[] | null | undefined;
   _sys?: {
     __typename?: "SystemInfo";
     filename: string;

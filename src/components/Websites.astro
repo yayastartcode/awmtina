@@ -1,13 +1,13 @@
 ---
 interface Website {
   __typename?: "WebsitesWebsites";
-  url: string;
+  url?: string | null | undefined;
 }
 
 interface Props {
   __typename?: "Websites";
   id?: string;
-  websites?: (Website | null)[] | null;
+  websites?: (Website | null)[] | null | undefined;
   _sys?: {
     __typename?: "SystemInfo";
     filename: string;

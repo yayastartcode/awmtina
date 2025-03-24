@@ -17,6 +17,74 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: "tiktokads",
+        label: "TikTok Ads Content",
+        path: "content/tiktokads",
+        format: "json",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Title",
+            required: true,
+          },
+          {
+            type: "rich-text",
+            name: "content",
+            label: "Page Content",
+            isBody: true,
+            templates: [
+              {
+                name: "CallToAction",
+                label: "Call to Action",
+                fields: [
+                  {
+                    name: "text",
+                    type: "string",
+                    label: "Button Text",
+                  },
+                  {
+                    name: "url",
+                    type: "string",
+                    label: "Button URL",
+                  },
+                  {
+                    name: "style",
+                    type: "string",
+                    label: "Button Style",
+                    options: ["primary", "secondary"],
+                    ui: {
+                      defaultValue: "primary"
+                    }
+                  },
+                ],
+              },
+              {
+                name: "FeaturePoint",
+                label: "Feature Point",
+                fields: [
+                  {
+                    name: "heading",
+                    type: "string",
+                    label: "Feature Heading",
+                  },
+                  {
+                    name: "description",
+                    type: "string",
+                    label: "Feature Description",
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: "image",
+            name: "featureImage",
+            label: "Feature Image",
+          },
+        ],
+      },
+      {
         name: "navigation",
         label: "Navigation",
         path: "content/navigation",

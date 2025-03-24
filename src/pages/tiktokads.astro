@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import { Image } from 'astro:assets';
+import infoGrimage from '../../public/public/images/infogr.jpeg';
+// Import the React component for rendering Tina rich text content
+import TinaContent from '../components/TinaContent.jsx';
+
+import { client } from "../../tina/__generated__/client";
+
+// Get navigation data for the header
+const navigationResponse = await client.queries.navigation({ relativePath: "nav.json" });
+const navigationData = navigationResponse.data.navigation;
+
+// Get TikTok Ads content
+const tiktokAdsResponse = await client.queries.tiktokads({ relativePath: "tiktokads.json" });
+const tiktokAdsData = tiktokAdsResponse.data.tiktokads;
+---
+
+<Layout title="Jasa Pembuatan Website & Google Ads - Ahli Web Murah">
+  <Header 
+    logo={navigationData.logo} 
+    links={navigationData.links} 
+    id={navigationData.id} 
+    _sys={navigationData._sys}
+  />
+  <main class="pt-24 pb-12">
+    <div class="container mx-auto px-4">
+      <section class="py-12">
+       
+        <div class="max-w-[510px] md:max-w-[688px] mx-auto text-center">
+          
+          
+          {tiktokAdsData && tiktokAdsData.content && (
+            <div class="tiktok-ads-content">
+              <TinaContent content={tiktokAdsData.content} client:load />
+            </div>
+          )}
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p>&copy; {new Date().getFullYear()} Ahli Web Murah. All rights reserved.</p>
+    </div>
+  </footer>
+</Layout> 

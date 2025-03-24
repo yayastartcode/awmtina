@@ -4,7 +4,6 @@ import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import Services from '../components/Services.astro';
 import Contact from '../components/Contact.astro';
-import ClientCarousel from '../components/ClientCarousel.astro';
 import Websites from '../components/Websites.astro';
 import { client } from "../../tina/__generated__/client";
 
@@ -23,20 +22,50 @@ const navigationData = navigationResponse.data.navigation;
 
 const websitesResponse = await client.queries.websites({ relativePath: "websites.json" });
 const websitesData = websitesResponse.data.websites;
+
+// Default values for required props that might be null/undefined
+const heroButtonText = heroData.buttonText || "Get Started";
+const heroButtonLink = heroData.buttonLink || "#";
 ---
 
 <Layout title="Website UMKM Murah 200 ribu - Ahli Web Murah">
-  <Header {...navigationData} />
+  <Header 
+    logo={navigationData.logo} 
+    links={navigationData.links} 
+    id={navigationData.id} 
+    _sys={navigationData._sys}
+  />
   <main>
-    <Hero {...heroData} />
-    <Services {...servicesData} />
-    <Contact {...contactData} />
-    <Websites {...websitesData} />
+    <Hero 
+      title={heroData.title}
+      description={heroData.description}
+      promotionImage={heroData.promotionImage}
+      buttonText={heroButtonText}
+      buttonLink={heroButtonLink}
+      id={heroData.id}
+      _sys={heroData._sys}
+    />
+    <Services 
+      id={servicesData.id}
+      _sys={servicesData._sys}
+      services={servicesData.services}
+    />
+    <Contact 
+      id={contactData.id}
+      whatsappLink={contactData.whatsappLink}
+      whatsappText={contactData.whatsappText}
+      _sys={contactData._sys}
+    />
+    <Websites 
+      id={websitesData.id}
+      _sys={websitesData._sys}
+      websites={websitesData.websites}
+    />
     
   </main>
   <footer class="bg-gray-900 text-white py-8">
     <div class="container mx-auto px-4 text-center">
-      <p>&copy; {new Date().getFullYear()} Your Agency. All rights reserved.</p>
+      <p>&copy; {new Date().getFullYear()} Ahli Web Murah. All rights reserved.</p>
     </div>
   </footer>
 </Layout>

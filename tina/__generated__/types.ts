@@ -82,6 +82,8 @@ export type Query = {
   collections: Array<Collection>;
   node: Node;
   document: DocumentNode;
+  tiktokads: Tiktokads;
+  tiktokadsConnection: TiktokadsConnection;
   navigation: Navigation;
   navigationConnection: NavigationConnection;
   hero: Hero;
@@ -115,6 +117,21 @@ export type QueryNodeArgs = {
 export type QueryDocumentArgs = {
   collection?: InputMaybe<Scalars['String']['input']>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryTiktokadsArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryTiktokadsConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<TiktokadsFilter>;
 };
 
 
@@ -208,6 +225,7 @@ export type QueryWebsitesConnectionArgs = {
 };
 
 export type DocumentFilter = {
+  tiktokads?: InputMaybe<TiktokadsFilter>;
   navigation?: InputMaybe<NavigationFilter>;
   hero?: InputMaybe<HeroFilter>;
   services?: InputMaybe<ServicesFilter>;
@@ -253,7 +271,66 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Navigation | Hero | Services | Contact | Clients | Websites | Folder;
+export type DocumentNode = Tiktokads | Navigation | Hero | Services | Contact | Clients | Websites | Folder;
+
+export type Tiktokads = Node & Document & {
+  __typename?: 'Tiktokads';
+  title: Scalars['String']['output'];
+  content?: Maybe<Scalars['JSON']['output']>;
+  featureImage?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type StringFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type TiktokadsContentCallToActionFilter = {
+  text?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+  style?: InputMaybe<StringFilter>;
+};
+
+export type TiktokadsContentFeaturePointFilter = {
+  heading?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type TiktokadsContentFilter = {
+  CallToAction?: InputMaybe<TiktokadsContentCallToActionFilter>;
+  FeaturePoint?: InputMaybe<TiktokadsContentFeaturePointFilter>;
+};
+
+export type ImageFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type TiktokadsFilter = {
+  title?: InputMaybe<StringFilter>;
+  content?: InputMaybe<TiktokadsContentFilter>;
+  featureImage?: InputMaybe<ImageFilter>;
+};
+
+export type TiktokadsConnectionEdges = {
+  __typename?: 'TiktokadsConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Tiktokads>;
+};
+
+export type TiktokadsConnection = Connection & {
+  __typename?: 'TiktokadsConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<TiktokadsConnectionEdges>>>;
+};
 
 export type NavigationLinks = {
   __typename?: 'NavigationLinks';
@@ -268,20 +345,6 @@ export type Navigation = Node & Document & {
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-};
-
-export type ImageFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type StringFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type NavigationLinksFilter = {
@@ -482,6 +545,8 @@ export type Mutation = {
   deleteDocument: DocumentNode;
   createDocument: DocumentNode;
   createFolder: DocumentNode;
+  updateTiktokads: Tiktokads;
+  createTiktokads: Tiktokads;
   updateNavigation: Navigation;
   createNavigation: Navigation;
   updateHero: Hero;
@@ -527,6 +592,18 @@ export type MutationCreateDocumentArgs = {
 export type MutationCreateFolderArgs = {
   collection?: InputMaybe<Scalars['String']['input']>;
   relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationUpdateTiktokadsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: TiktokadsMutation;
+};
+
+
+export type MutationCreateTiktokadsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: TiktokadsMutation;
 };
 
 
@@ -602,6 +679,7 @@ export type MutationCreateWebsitesArgs = {
 };
 
 export type DocumentUpdateMutation = {
+  tiktokads?: InputMaybe<TiktokadsMutation>;
   navigation?: InputMaybe<NavigationMutation>;
   hero?: InputMaybe<HeroMutation>;
   services?: InputMaybe<ServicesMutation>;
@@ -612,12 +690,19 @@ export type DocumentUpdateMutation = {
 };
 
 export type DocumentMutation = {
+  tiktokads?: InputMaybe<TiktokadsMutation>;
   navigation?: InputMaybe<NavigationMutation>;
   hero?: InputMaybe<HeroMutation>;
   services?: InputMaybe<ServicesMutation>;
   contact?: InputMaybe<ContactMutation>;
   clients?: InputMaybe<ClientsMutation>;
   websites?: InputMaybe<WebsitesMutation>;
+};
+
+export type TiktokadsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['JSON']['input']>;
+  featureImage?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NavigationLinksMutation = {
@@ -670,6 +755,8 @@ export type WebsitesMutation = {
   websites?: InputMaybe<Array<InputMaybe<WebsitesWebsitesMutation>>>;
 };
 
+export type TiktokadsPartsFragment = { __typename: 'Tiktokads', title: string, content?: any | null, featureImage?: string | null };
+
 export type NavigationPartsFragment = { __typename: 'Navigation', logo: string, links?: Array<{ __typename: 'NavigationLinks', label?: string | null, url?: string | null } | null> | null };
 
 export type HeroPartsFragment = { __typename: 'Hero', title: string, description?: string | null, promotionImage?: string | null, buttonText: string, buttonLink: string };
@@ -681,6 +768,25 @@ export type ContactPartsFragment = { __typename: 'Contact', whatsappLink: string
 export type ClientsPartsFragment = { __typename: 'Clients', clients?: Array<{ __typename: 'ClientsClients', name?: string | null, logo?: string | null } | null> | null };
 
 export type WebsitesPartsFragment = { __typename: 'Websites', websites?: Array<{ __typename: 'WebsitesWebsites', url: string } | null> | null };
+
+export type TiktokadsQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type TiktokadsQuery = { __typename?: 'Query', tiktokads: { __typename: 'Tiktokads', id: string, title: string, content?: any | null, featureImage?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type TiktokadsConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<TiktokadsFilter>;
+}>;
+
+
+export type TiktokadsConnectionQuery = { __typename?: 'Query', tiktokadsConnection: { __typename?: 'TiktokadsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'TiktokadsConnectionEdges', cursor: string, node?: { __typename: 'Tiktokads', id: string, title: string, content?: any | null, featureImage?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type NavigationQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -796,6 +902,14 @@ export type WebsitesConnectionQueryVariables = Exact<{
 
 export type WebsitesConnectionQuery = { __typename?: 'Query', websitesConnection: { __typename?: 'WebsitesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'WebsitesConnectionEdges', cursor: string, node?: { __typename: 'Websites', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, websites?: Array<{ __typename: 'WebsitesWebsites', url: string } | null> | null } | null } | null> | null } };
 
+export const TiktokadsPartsFragmentDoc = gql`
+    fragment TiktokadsParts on Tiktokads {
+  __typename
+  title
+  content
+  featureImage
+}
+    `;
 export const NavigationPartsFragmentDoc = gql`
     fragment NavigationParts on Navigation {
   __typename
@@ -854,6 +968,63 @@ export const WebsitesPartsFragmentDoc = gql`
   }
 }
     `;
+export const TiktokadsDocument = gql`
+    query tiktokads($relativePath: String!) {
+  tiktokads(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...TiktokadsParts
+  }
+}
+    ${TiktokadsPartsFragmentDoc}`;
+export const TiktokadsConnectionDocument = gql`
+    query tiktokadsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TiktokadsFilter) {
+  tiktokadsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...TiktokadsParts
+      }
+    }
+  }
+}
+    ${TiktokadsPartsFragmentDoc}`;
 export const NavigationDocument = gql`
     query navigation($relativePath: String!) {
   navigation(relativePath: $relativePath) {
@@ -1199,7 +1370,13 @@ export const WebsitesConnectionDocument = gql`
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
-      navigation(variables: NavigationQueryVariables, options?: C): Promise<{data: NavigationQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavigationQueryVariables, query: string}> {
+      tiktokads(variables: TiktokadsQueryVariables, options?: C): Promise<{data: TiktokadsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TiktokadsQueryVariables, query: string}> {
+        return requester<{data: TiktokadsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TiktokadsQueryVariables, query: string}, TiktokadsQueryVariables>(TiktokadsDocument, variables, options);
+      },
+    tiktokadsConnection(variables?: TiktokadsConnectionQueryVariables, options?: C): Promise<{data: TiktokadsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TiktokadsConnectionQueryVariables, query: string}> {
+        return requester<{data: TiktokadsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TiktokadsConnectionQueryVariables, query: string}, TiktokadsConnectionQueryVariables>(TiktokadsConnectionDocument, variables, options);
+      },
+    navigation(variables: NavigationQueryVariables, options?: C): Promise<{data: NavigationQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavigationQueryVariables, query: string}> {
         return requester<{data: NavigationQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavigationQueryVariables, query: string}, NavigationQueryVariables>(NavigationDocument, variables, options);
       },
     navigationConnection(variables?: NavigationConnectionQueryVariables, options?: C): Promise<{data: NavigationConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavigationConnectionQueryVariables, query: string}> {

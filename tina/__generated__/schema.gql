@@ -54,6 +54,8 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
+  tiktokads(relativePath: String): Tiktokads!
+  tiktokadsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TiktokadsFilter): TiktokadsConnection!
   navigation(relativePath: String): Navigation!
   navigationConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NavigationFilter): NavigationConnection!
   hero(relativePath: String): Hero!
@@ -69,6 +71,7 @@ type Query {
 }
 
 input DocumentFilter {
+  tiktokads: TiktokadsFilter
   navigation: NavigationFilter
   hero: HeroFilter
   services: ServicesFilter
@@ -100,7 +103,63 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Navigation | Hero | Services | Contact | Clients | Websites | Folder
+union DocumentNode = Tiktokads | Navigation | Hero | Services | Contact | Clients | Websites | Folder
+
+type Tiktokads implements Node & Document {
+  title: String!
+  content: JSON
+  featureImage: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input StringFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input TiktokadsContentCallToActionFilter {
+  text: StringFilter
+  url: StringFilter
+  style: StringFilter
+}
+
+input TiktokadsContentFeaturePointFilter {
+  heading: StringFilter
+  description: StringFilter
+}
+
+input TiktokadsContentFilter {
+  CallToAction: TiktokadsContentCallToActionFilter
+  FeaturePoint: TiktokadsContentFeaturePointFilter
+}
+
+input ImageFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input TiktokadsFilter {
+  title: StringFilter
+  content: TiktokadsContentFilter
+  featureImage: ImageFilter
+}
+
+type TiktokadsConnectionEdges {
+  cursor: String!
+  node: Tiktokads
+}
+
+type TiktokadsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [TiktokadsConnectionEdges]
+}
 
 type NavigationLinks {
   label: String
@@ -113,20 +172,6 @@ type Navigation implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input ImageFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
-}
-
-input StringFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
 }
 
 input NavigationLinksFilter {
@@ -306,6 +351,8 @@ type Mutation {
   deleteDocument(collection: String, relativePath: String!): DocumentNode!
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   createFolder(collection: String, relativePath: String!): DocumentNode!
+  updateTiktokads(relativePath: String!, params: TiktokadsMutation!): Tiktokads!
+  createTiktokads(relativePath: String!, params: TiktokadsMutation!): Tiktokads!
   updateNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
   createNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
   updateHero(relativePath: String!, params: HeroMutation!): Hero!
@@ -321,6 +368,7 @@ type Mutation {
 }
 
 input DocumentUpdateMutation {
+  tiktokads: TiktokadsMutation
   navigation: NavigationMutation
   hero: HeroMutation
   services: ServicesMutation
@@ -331,12 +379,19 @@ input DocumentUpdateMutation {
 }
 
 input DocumentMutation {
+  tiktokads: TiktokadsMutation
   navigation: NavigationMutation
   hero: HeroMutation
   services: ServicesMutation
   contact: ContactMutation
   clients: ClientsMutation
   websites: WebsitesMutation
+}
+
+input TiktokadsMutation {
+  title: String
+  content: JSON
+  featureImage: String
 }
 
 input NavigationLinksMutation {

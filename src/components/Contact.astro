@@ -3,7 +3,7 @@ interface Props {
   __typename?: "Contact";
   id?: string;
   whatsappLink: string;
-  whatsappText: string;
+  whatsappText?: string | null | undefined;
   _sys?: {
     __typename?: "SystemInfo";
     filename: string;

@@ -3,10 +3,10 @@ interface Props {
   __typename?: "Hero";
   id?: string;
   title: string;
-  description: string;
-  promotionImage: string;
-  buttonText?: string;
-  buttonLink?: string;
+  description?: string | null | undefined;
+  promotionImage?: string | null | undefined;
+  buttonText: string;
+  buttonLink: string;
   _sys?: {
     __typename?: "SystemInfo";
     filename: string;

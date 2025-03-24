@@ -1,8 +1,8 @@
 ---
 interface Link {
   __typename?: "NavigationLinks";
-  label?: string;
-  url?: string;
+  label?: string | null | undefined;
+  url?: string | null | undefined;
 }
 
 interface Props {
@@ -19,7 +19,7 @@ interface Props {
     relativePath: string;
     extension: string;
   };
-  links?: (Link | null)[] | null;
+  links?: (Link | null)[] | null | undefined;
 }
 
 const { logo = "/images/logo.svg", links = [] } = Astro.props;
