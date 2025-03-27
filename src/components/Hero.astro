@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 interface Props {
   __typename?: "Hero";
   id?: string;
@@ -46,6 +47,7 @@ const {
         </a>
       </div>
       <div class="md:w-1/2">
+        {promotionImage && <Image src={promotionImage} alt="Promotion" width={800} height={600} />}
         <img
           src={promotionImage}
           alt="Promotion"
