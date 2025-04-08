@@ -1,12 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import { Image } from 'astro:assets';
-import infoGrimage from '../../public/public/images/infogr.jpeg';
 // Import the React component for rendering Tina rich text content
 import TinaContent from '../components/TinaContent.jsx';
 
 import { client } from "../../tina/__generated__/client";
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 
 // Get navigation data for the header
 const navigationResponse = await client.queries.navigation({ relativePath: "nav.json" });
@@ -15,6 +14,7 @@ const navigationData = navigationResponse.data.navigation;
 // Get TikTok Ads content
 const tiktokAdsResponse = await client.queries.tiktokads({ relativePath: "tiktokads.json" });
 const tiktokAdsData = tiktokAdsResponse.data.tiktokads;
+const { whatsappLink = "#", whatsappText = "Lihat Portofolio di WhatsApp" } = Astro.props;
 ---
 
 <Layout title="Jasa Pembuatan Website & Google Ads - Ahli Web Murah">
@@ -36,6 +36,13 @@ const tiktokAdsData = tiktokAdsResponse.data.tiktokads;
               <TinaContent content={tiktokAdsData.content} client:load />
             </div>
           )}
+
+    <WhatsAppButton
+    whatsappLink={whatsappLink}
+    whatsappText={whatsappText}
+    buttonClass="inline-flex items-center px-8 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+    iconClass="w-6 h-6 mr-2"
+    />
         </div>
       </section>
     </div>
