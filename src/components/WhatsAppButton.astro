@@ -22,23 +22,29 @@ const {
   rel="noopener noreferrer"
   class={`${buttonClass} block w-full sm:w-auto`}
   style="
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     text-decoration: none;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
   "
 >
   {showIcon && (
     <img 
       src="/images/wasap.svg" 
       alt="WhatsApp" 
-      class={`${iconClass} block`}
-      style="max-width: 100%; height: auto;" 
+      class={`${iconClass}`}
+      style="display: inline-block; max-width: 100%; height: auto;" 
+      width="24"
+      height="24"
     />
   )}
-  <span style="display: block;">{whatsappText}</span>
+  <span style="display: inline-block;">{whatsappText}</span>
 </a>

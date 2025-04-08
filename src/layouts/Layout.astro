@@ -13,12 +13,23 @@ const { title, description = "Ahli Web Murah - Website UMKM Professional Hanya 2
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <title>{title}</title>
     <meta name="description" content={description} />
-      <GoogleTagmanager id="GTM-579NCP5G" domain="https://googletagmanager.com" container="gtm.js" />
-  </head>
+    <GoogleTagmanager id="GTM-579NCP5G" domain="https://googletagmanager.com" container="gtm.js" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      /* Fix for iOS button rendering */
+      a, button {
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body class="min-h-screen bg-white">
     <GoogleTagmanagerNoscript id="GTM-579NCP5G" domain="https://googletagmanager.com" />

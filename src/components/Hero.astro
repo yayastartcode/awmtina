@@ -42,16 +42,31 @@ const {
         <a
           href={buttonLink}
           class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+          style="
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            appearance: none !important;
+            position: relative;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-decoration: none;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+          "
         >
           {buttonText}
         </a>
       </div>
       <div class="md:w-1/2">
-        {promotionImage && <Image src={promotionImage} alt="Promotion" width={800} height={600} />}
         <img
           src={promotionImage}
           alt="Promotion"
           class="w-full h-auto rounded-lg shadow-lg"
+          width="800"
+          height="600"
         />
       </div>
     </div>
