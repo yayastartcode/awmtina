@@ -20,10 +20,11 @@ const {
   href={whatsappLink}
   target="_blank"
   rel="noopener noreferrer"
-  class={buttonClass}
+  class={`${buttonClass} flex justify-center items-center`}
+  style="display: -webkit-inline-flex; -webkit-align-items: center;"
 >
   {showIcon && (
-    <img src="/images/wasap.svg" alt="WhatsApp" class={iconClass} />
+    <img src="/images/wasap.svg" alt="WhatsApp" class={`${iconClass} flex-shrink-0`} style="display: block;" />
   )}
-  <span>{whatsappText}</span>
+  <span style="display: inline-block;">{whatsappText}</span>
 </a>
