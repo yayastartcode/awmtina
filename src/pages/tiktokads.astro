@@ -14,7 +14,7 @@ const navigationData = navigationResponse.data.navigation;
 // Get TikTok Ads content
 const tiktokAdsResponse = await client.queries.tiktokads({ relativePath: "tiktokads.json" });
 const tiktokAdsData = tiktokAdsResponse.data.tiktokads;
-const { whatsappLink = "#", whatsappText = "Lihat Portofolio di WhatsApp" } = Astro.props;
+const { whatsappLink = "https://wa.me/628895259853", whatsappText = "Ambil Promo di WhatsApp" } = Astro.props;
 ---
 
 <Layout title="Jasa Pembuatan Website & Google Ads - Ahli Web Murah">
