@@ -20,11 +20,25 @@ const {
   href={whatsappLink}
   target="_blank"
   rel="noopener noreferrer"
-  class={`${buttonClass} flex justify-center items-center`}
-  style="display: -webkit-inline-flex; -webkit-align-items: center;"
+  class={`${buttonClass} block w-full sm:w-auto`}
+  style="
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  "
 >
   {showIcon && (
-    <img src="/images/wasap.svg" alt="WhatsApp" class={`${iconClass} flex-shrink-0`} style="display: block;" />
+    <img 
+      src="/images/wasap.svg" 
+      alt="WhatsApp" 
+      class={`${iconClass} block`}
+      style="max-width: 100%; height: auto;" 
+    />
   )}
-  <span style="display: inline-block;">{whatsappText}</span>
+  <span style="display: block;">{whatsappText}</span>
 </a>
