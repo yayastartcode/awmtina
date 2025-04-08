@@ -5,7 +5,7 @@ import Header from '../components/Header.astro';
 import TinaContent from '../components/TinaContent.jsx';
 
 import { client } from "../../tina/__generated__/client";
-import WhatsAppButton from '../components/WhatsAppButton.astro';
+// Traditional button approach - no component import
 
 // Get navigation data for the header
 const navigationResponse = await client.queries.navigation({ relativePath: "nav.json" });
@@ -35,12 +35,20 @@ const { whatsappLink = "https://wa.me/628895259853", whatsappText = "Ambil Promo
               </div>
             )}
 
-            <WhatsAppButton
-              whatsappLink={whatsappLink}
-              whatsappText={whatsappText}
-              buttonClass="inline-flex items-center px-8 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
-              iconClass="w-6 h-6 mr-2"
-            />
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block w-full sm:w-auto px-8 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-center">
+              <img 
+                src="/images/wasap.svg" 
+                alt="WhatsApp" 
+                width="24" 
+                height="24"
+                style="display: inline-block; vertical-align: middle; margin-right: 8px;"
+              />
+              <span>{whatsappText}</span>
+            </a>
           </div>
         </section>
       </div>

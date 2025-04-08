@@ -1,5 +1,5 @@
 ---
-import WhatsAppButton from './WhatsAppButton.astro';
+// Traditional button approach - no component import
 
 interface Props {
   __typename?: "Contact";
@@ -30,12 +30,20 @@ const { whatsappLink = "#", whatsappText = "Contact us on WhatsApp" } = Astro.pr
       <p class="text-lg text-gray-600 mb-8">
         Ready to start your project? Contact us now!
       </p>
-      <WhatsAppButton
-        whatsappLink={whatsappLink}
-        whatsappText={whatsappText}
-        buttonClass="inline-flex items-center px-8 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
-        iconClass="w-6 h-6 mr-2"
-      />
+      <a
+        href={whatsappLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block px-8 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-center">
+        <img 
+          src="/images/wasap.svg" 
+          alt="WhatsApp" 
+          width="24" 
+          height="24"
+          style="display: inline-block; vertical-align: middle; margin-right: 8px;"
+        />
+        <span>{whatsappText}</span>
+      </a>
     </div>
   </div>
 </section>
